@@ -1,0 +1,31 @@
+server:
+  port: 9002
+spring:
+  application:
+    name: nacos-sentinel
+  cloud:
+    nacos:
+      discovery:
+        server-addr: localhost:8848
+    sentinel:
+      transport:
+        dashboard: localhost:8080
+        port: 8719
+      datasource:
+        dsl:
+          nacos:
+            server-addr: localhost:8848
+            group-id: DEFAULT_GROUP
+            data-id: nacos-sentinel
+            data-type: json
+            rule-type: flow
+  devtools:
+    restart:
+      enabled: true  #设置开启热部署，false即不开启热部署
+      additional-paths: src/main/java #指定热部署的目录
+      exclude: test/**  #指定目录不更新
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'

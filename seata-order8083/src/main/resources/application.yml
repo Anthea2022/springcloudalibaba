@@ -1,0 +1,38 @@
+server:
+  port: 8083
+spring:
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/seata_order?serverTimezone=UTC
+    username: root
+    password: sxn700320
+  application:
+    name: seata-order
+  cloud:
+    nacos:
+      discovery:
+        server-addr: localhost:8848
+    alibaba:
+      seata:
+        tx-service-group: zk_tx_group
+  devtools:
+    restart:
+      enabled: true  #设置开启热部署，false即不开启热部署
+      additional-paths: src/main/java #指定热部署的目录
+      exclude: test/**  #指定目录不更新
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+feign:
+  hystrix:
+    enabled: false
+
+logging:
+  level:
+    io:
+      seata: info
+mybatis:
+  mapper-locations: classpath:mapper/*.xml
